@@ -5,14 +5,16 @@ const ToDoForm = props => {
     <form onSubmit={props.addToDo}>
       <input
         // onChange={props.handleTodoChange}
-        onChange = {props.handleChanges}
+        onChange={props.handleChanges}
         type="text"
         name="todo"
         value={props.value}
         placeholder="Enter an activity "
       />
-      <button onClick = {props.addToDo } type = "submit">Add To do</button>
-      <button>Clear Completed</button>
+      <button onClick={props.addToDo} type="submit">
+        Add To do
+      </button>
+      <button onClick={props.clearCompleted}>Clear Completed</button>
     </form>
   );
 }; // end ToDoForm component

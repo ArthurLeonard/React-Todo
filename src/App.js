@@ -65,18 +65,49 @@ class App extends React.Component {
     console.log(this.state.task);
   };
 
+  // takes itemId as parameter
+  toggleItem = itemId => {
+    console.log(this.state.tasks[2].completed);
+
+    this.setState({
+      tasks: this.state.tasks.map(tido => {
+        // console.log(tido.id);
+        // console.log(tido.task);
+        if (tido.id === itemId) {
+          return {
+            task: tido.task,
+            id: tido.id,
+            completed: !tido.completed
+          };
+        } //endif
+        else return tido;
+      }) //end map
+    }); // end setState()
+    console.log(itemId);
+  }; // end toggleItem()
+
+  clearCompleted = e => {
+    e.preventDefault();
+    console.log("in clearComplete method");
+    this.setState({
+      tasks: this.state.tasks.filter(task => !task.completed)
+    });
+  }; // end clearCompleted()
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        
+
         <div className="mapped-todos">
           {this.state.tasks.map(task => (
-            <ToDo todo={task} />
+            <ToDo todo={task} toggleItem={this.toggleItem} />
           ))}
         </div>
 
         <ToDoForm
+          // toggleItem = {this.toggleItem}
+          clearCompleted={this.clearCompleted}
           addToDo={this.addToDo}
           name={this.state.name}
           handleChanges={this.handleChanges}
